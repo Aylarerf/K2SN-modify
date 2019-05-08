@@ -123,7 +123,7 @@ node create_L_tree(node *pk, u32 id){
 	u8 rdp[sklen];
 
 	for(i=0;i<6;i++){
-		set_random_pad(id_t+i,0,rdp);
+		set_random_pad(id_t+i,1,rdp);
 		memcpy(temp.key, (pk+2*i)->key,pklen);
 		for(j=0;j<merlen;j++) 
 			temp.key[pklen-merlen+j] = temp.key[pklen-merlen+j] ^ (pk+2*i+1)->key[j];
@@ -138,7 +138,7 @@ node create_L_tree(node *pk, u32 id){
 
 	id_t = id_t/2;
 	for(i=0;i<3;i++){
-		set_random_pad(id_t+i,1,rdp);
+		set_random_pad(id_t+i,2,rdp);
 		memcpy(temp.key, internal_node[2*i].key,pklen);
 		for(j=0;j<merlen;j++) 
 			temp.key[pklen-merlen+j] = temp.key[pklen-merlen+j] ^ internal_node[2*i+1].key[j];
@@ -151,7 +151,7 @@ node create_L_tree(node *pk, u32 id){
 
 	k=3;
 	for(i=6;i<131;i++){
-		set_random_pad(id_t+i,1,rdp);
+		set_random_pad(id_t+i,2,rdp);
 		memcpy(temp.key, (pk+2*i)->key,pklen);
 		for(j=0;j<merlen;j++) 
 			temp.key[pklen-merlen+j] = temp.key[pklen-merlen+j] ^ (pk+2*i+1)->key[j];
@@ -164,7 +164,7 @@ node create_L_tree(node *pk, u32 id){
 	}
 
 	w = 1 << (l-3);
-	l1 = 2;
+	l1 = 3;
 	for(k=h+l-2;k>h;k--){
 		id_t = id_t/2;
 		for(i=0;i<w;i++){
